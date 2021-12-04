@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="manifest" href="manifest.json" />
+  <!-- CODELAB: Add meta theme-color -->
+  <meta name="theme-color" content="#2F3BA2" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Aplicacion para adoptar un perrito" />
+  <meta name="keywords" content="Perros">
+  <meta name="msapplication-TileColor" content="#2b5797">
+  <!-- Android  -->
+  <meta name="theme-color" content="#737674">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-title" content="AdoptaunDog">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<!-- WINDOWS -->
+<meta name="msapplication-config" content="browserconfig.xml" >
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.ico">
+  <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/party.js"></script>
+  <title>Dental Clean</title>
+</head>
+<body>
+  <div class="preloader"> <img class="preloader-icon" src="images/icons/icon-144x144.png" alt="My Site Preloader">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-light bg-light mb-5">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="images/toooth-512.png" alt="" width="38" height="30" class="d-inline-block align-text-top">
+        Dental Clean
+      </a>
+    </div>
+  </nav>
+  <div class="container">
+    <form class="row g-3">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Nombre</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Apellidos</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Edad</label>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Direccion</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Telefono Fijo</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Numero de Celular</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Correo</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="date" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Fecha de la ultima consulta</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="date" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Fecha de consulta</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="time" class="form-control" id="floatingInputGrid" placeholder="name@example.com">
+          <label for="floatingInputGrid">Hora de consulta</label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+          <label for="floatingTextarea">Mensaje / Comentarios</label>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-success fw-bold">Crear cita</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div id="snackbar">
+    <h5>Nueva version disponible. </h5><button id="lauchUpdate" class="btn btn-info">Actualizar</button>
+  </div>
+  <footer class="bg-light text-center">
+    <section class="mt-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <p class="mt-4 text-center fw-bold"><small>All rights reserved © Dental Clean 2021</small></p>
+        </div>
+
+      </div>
+    </section>
+
+  </footer>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

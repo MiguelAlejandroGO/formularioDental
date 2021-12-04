@@ -1,0 +1,101 @@
+body{
+  background-color:#ffffff; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.navbar-brand{
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.btn-info {
+  color: rgb(16, 15, 15) !important;
+  font-weight: bold!important;
+  border-radius: 4px!important;
+  padding: 10px !important;
+  font-size: 1rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  background-color:#339889  !important;
+  border-color: #339889 !important;
+ }
+ .nav-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ .card{
+   border-color: transparent !important;
+   background-color:transparent !important;
+ }
+ .alert-content{
+  display: flex;
+  justify-content: center;
+  font-family: Arial;
+  font-weight: bold;
+ }
+ .alert-content h5{
+  padding: 50px 5px 20px 20px;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+ #snackbar {
+  visibility: hidden; 
+  min-width: 280px; 
+  margin-left: -140px; 
+  background-color: #333;
+  color: #fff; 
+  text-align: center; 
+  border-radius: 15px; 
+  padding: 16px; 
+  position: fixed; 
+  z-index: 1; 
+  left: 50%; 
+  bottom: 30px; 
+  display: none;
+ }
+#snackbar h5 {
+  text-align: center;
+    padding: 8px;
+}
+#snackbar button{
+  margin-left: 20px;
+}
+
+#snackbar.show {
+  display: block !important;
+  visibility: visible; /* Show the snackbar */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+.preloader
+{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: #fff;
+z-index: 9999;
+text-align: center;
+display: block;
+}
+.preloader-icon
+{
+position: relative;
+top: 45%;
+width: 100px;
+border-radius: 50%;
+}
+.d-flex {
+  position: relative;
+  top: 48%;
+ }
+ 
