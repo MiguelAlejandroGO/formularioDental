@@ -4,8 +4,6 @@ let immutableCache = "immutableCache_v1";
 const _staticFiles = [
   "/",
   "/index.html",
-  "/images/dog_icon.svg",
-  "/images/alert-dog.png",
   "/css/style.css",
   "/js/main.js",
 ];
