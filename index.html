@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <link rel="manifest" href="manifest.json" />
   <!-- CODELAB: Add meta theme-color -->
@@ -7,29 +8,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="description" content="Aplicacion para adoptar un perrito" />
-  <meta name="keywords" content="Perros">
+  <meta name="description" content="Aplicacion para tu dentista" />
+  <meta name="keywords" content="Dentista">
   <meta name="msapplication-TileColor" content="#2b5797">
   <!-- Android  -->
   <meta name="theme-color" content="#737674">
   <meta name="mobile-web-app-capable" content="yes">
   <!-- iOS -->
-  <meta name="apple-mobile-web-app-title" content="AdoptaunDog">
+  <meta name="apple-mobile-web-app-title" content="Dental">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<!-- WINDOWS -->
-<meta name="msapplication-config" content="browserconfig.xml" >
+  <!-- WINDOWS -->
+  <meta name="msapplication-config" content="browserconfig.xml">
   <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.ico">
   <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icons//favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/icons//favicon-16x16.png">
+  <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   <!-- Styles -->
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/style.css">
   <script src="js/db.js"></script>
   <title>Dental Clean</title>
 </head>
+
 <body onload="startDb()">
-  <div class="preloader"> <img class="preloader-icon" src="images/icons/icon-144x144.png" width="auto" height="auto" alt="My Site Preloader">
+  <div class="preloader"> <img class="preloader-icon" src="images/icons/icon-144x144.png" width="auto" height="auto"
+      alt="My Site Preloader">
     <div class="d-flex justify-content-center">
       <div class="spinner-border" role="status">
       </div>
@@ -51,7 +60,7 @@
           <label for="name">Nombre Completo</label>
         </div>
       </div>
-     
+
       <div class="col-md-3">
         <div class="form-floating">
           <input type="number" class="form-control" id="age" placeholder="Edad">
@@ -110,7 +119,7 @@
 
       <div class="col-12 ">
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="button"  onclick="addDate();" class="btn btn-success fw-bold">Crear cita</button>
+          <button type="button" onclick="addDate();" class="btn btn-success fw-bold">Crear cita</button>
         </div>
 
       </div>

@@ -1,6 +1,6 @@
   {
-  "name":"Adopta un Dog",
-  "short_name" : "AdoptaUnDog",
+  "name":"Dental Clean",
+  "short_name" : "DentalClean",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#fdfdfd",
