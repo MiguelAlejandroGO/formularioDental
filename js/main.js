@@ -46,8 +46,8 @@ window.addEventListener("offline", () => {
 
 function addDate() {
 
-  (async () => {
-    const rawResponse = await fetch('https://api-citas-dental.vercel.app/create/', {
+ 
+  fetch('https://api-citas-dental.vercel.app/create/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -65,11 +65,11 @@ function addDate() {
       dateNew: "2021-12-05",
       hoursDate: "13:25",
       message: "Dolor de muelas"})
-    });
-    const content = await rawResponse.json();
+    }) .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));;
+   
   
-    console.log(content);
-  })();
 
   // let dataForm = {
   //   id: 0,
@@ -97,5 +97,5 @@ function addDate() {
   // fetch("https://api-citas-dental.vercel.app/create", requestOptions)
   //   .then((response) => response.text())
   //   .then((result) => console.log(result))
-    //.catch((error) => console.log("error", error));
+  //   .catch((error) => console.log("error", error));
 }
