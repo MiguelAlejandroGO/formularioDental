@@ -45,60 +45,32 @@ window.addEventListener("offline", () => {
 });
 
 function addDate() {
-  var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({
-  "id": 0,
-  "name": "Alejandro Ortega",
-  "age": 22,
-  "address": "Ebanos #105",
-  "numberTel": "7641257458",
-  "numberCel": "7641025856",
-  "email": "migue@gmail.com",
-  "dateLast": "2021-12-04",
-  "dateNew": "2021-12-05",
-  "hoursDate": "13:25:00",
-  "message": "Dolor de muelas"
-});
+  let dataForm = {
+    id: 0,
+    name: document.querySelector("#name").value,
+    age: parseInt(document.querySelector("#age").value),
+    address: document.querySelector("#address").value,
+    numberTel: document.querySelector("#numberTel").value,
+    numberCel: document.querySelector("#numberCel").value,
+    email: document.querySelector("#email").value,
+    dateLast: document.querySelector("#datePast").value,
+    dateNew: document.querySelector("#dateNew").value,
+    hoursDate: document.querySelector("#timeNew").value,
+    message: document.querySelector("#message").value,
+  };
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow',
-  mode: 'no-cors'
-};
-
-fetch("https://api-citas-dental.vercel.app/create/", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  // let dataForm = {
-  //   id: 0,
-  //   name: document.querySelector("#name").value,
-  //   age: parseInt(document.querySelector("#age").value),
-  //   address: document.querySelector("#address").value,
-  //   numberTel: document.querySelector("#numberTel").value,
-  //   numberCel: document.querySelector("#numberCel").value,
-  //   email: document.querySelector("#email").value,
-  //   dateLast: document.querySelector("#datePast").value,
-  //   dateNew: document.querySelector("#dateNew").value,
-  //   hoursDate: document.querySelector("#timeNew").value,
-  //   message: document.querySelector("#message").value,
-  // };
-
-  // var requestOptions = {
-  //   method: "POST",
-  //   headers: new Headers({
-  //     "Content-Type": "application/json",
-  //     "Access-Control-Allow-Origin": "*",
-  //   }),
-  //   body: JSON.stringify(dataForm),
-  //   mode: "no-cors",
-  // };
-  // fetch("https://api-citas-dental.vercel.app/create", requestOptions)
-  //   .then((response) => response.text())
-  //   .then((result) => console.log(result))
-  //   .catch((error) => console.log("error", error));
+  var requestOptions = {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    }),
+    body: JSON.stringify(dataForm),
+    mode: "no-cors",
+  };
+  fetch("https://api-citas-dental.vercel.app/create", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
