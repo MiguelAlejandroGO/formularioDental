@@ -6,12 +6,12 @@ const _staticFiles = [
   "/index.html",
   "/css/style.css",
   "/js/main.js",
+  "/js/db.js"
 ];
 const _immutableFiles = [
   "/css/bootstrap.min.css",
   "/css/bootstrap.min.css.map",
   "/js/jquery.js",
-  "/js/party.js",
   "/js/bootstrap.bundle.min.js",
   "/js/bootstrap.bundle.min.js.map",
 ];
@@ -41,17 +41,17 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
-  const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
-    return (
-      cacheResponse ||
-      fetch(fetchEvent.request).then((networkResponse) => {
-        caches.open(dynamicCache).then((cache) => {
-          cache.put(fetchEvent.request, networkResponse.clone());
-          return networkResponse;
-        });
-      })
-    );
-  });
+  // const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
+  //   return (
+  //     cacheResponse ||
+  //     fetch(fetchEvent.request).then((networkResponse) => {
+  //       caches.open(dynamicCache).then((cache) => {
+  //         cache.put(fetchEvent.request, networkResponse.clone());
+  //         return networkResponse;
+  //       });
+  //     })
+  //   );
+  // });
 });
 //First cache with backup
 self.addEventListener("message", (msgClient) => {
