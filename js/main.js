@@ -1,3 +1,8 @@
+let flagConection = true;
+let db;
+let openRequest = indexedDB.open('test_db', 1);
+
+
 window.onload = function () {
   setTimeout(function () {
     document.querySelector(".preloader").style.display = "none";
@@ -23,6 +28,22 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+openRequest.onupgradeneeded = function(e) {
+  let db = e.target.result;
+  console.log('running onupgradeneeded');
+  if (!db.objectStoreNames.contains('dbDates')) {
+    let storeOS = db.createObjectStore('dates', {autoIncrement: true});
+  }
+};
+openRequest.onsuccess = function(e) {
+  console.log('running onsuccess');
+  db = e.target.result;
+};
+openRequest.onerror = function(e) {
+  console.log('onerror!');
+  console.dir(e);
+};
 function showSnackbarUpdate() {
   let x = document.getElementById("snackbar");
   x.className = "show";
@@ -37,55 +58,88 @@ lauchUpdate.addEventListener("click", () => {
 });
 
 window.addEventListener("online", () => {
-  console.log("En linea");
+  let  toast = document.querySelector('.warning');
+  flagConection = true;
+  iziToast.destroy();({transitionOut: 'fadeOutUp'}, toast);
+  iziToast.info({
+    title: 'Conexion restablecida',
+    position: 'topLeft'
+});
 });
 
 window.addEventListener("offline", () => {
-  console.log("Sin conexion");
+  iziToast.warning({
+    id: 'warning',
+    class: 'warning',
+    title: 'Error de Conexion',
+    message: 'Esta en modo offline',
+    timeout: false,
+    position: 'topLeft'
+});
+  flagConection = false;
 });
 
 function addDate() {
-  let dataForm = {
-    id: 0,
-    name: document.querySelector("#name").value,
-    age: parseInt(document.querySelector("#age").value),
-    address: document.querySelector("#address").value,
-    numberTel: document.querySelector("#numberTel").value,
-    numberCel: document.querySelector("#numberCel").value,
-    email: document.querySelector("#email").value,
-    dateLast: document.querySelector("#datePast").value,
-    dateNew: document.querySelector("#dateNew").value,
-    hoursDate: document.querySelector("#timeNew").value,
-    message: document.querySelector("#message").value,
+
+  if(flagConection) {
+    let dataForm = {
+      id: 0,
+      name: document.querySelector("#name").value,
+      age: parseInt(document.querySelector("#age").value),
+      address: document.querySelector("#address").value,
+      numberTel: document.querySelector("#numberTel").value,
+      numberCel: document.querySelector("#numberCel").value,
+      email: document.querySelector("#email").value,
+      dateLast: document.querySelector("#datePast").value,
+      dateNew: document.querySelector("#dateNew").value,
+      hoursDate: document.querySelector("#timeNew").value,
+      message: document.querySelector("#message").value,
+    };
+  
+    fetch('https://api-citas-dental.vercel.app/create/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataForm)
+      }) .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));;
+     
+    
+  }else{
+    addItem();
+  }
+ 
+}
+
+
+function addItem() {
+
+  var transaction = db.transaction(['dates'], 'readwrite');
+  var store = transaction.objectStore('dates');
+  var item = {
+      id: 0,
+      name: document.querySelector("#name").value,
+      age: parseInt(document.querySelector("#age").value),
+      address: document.querySelector("#address").value,
+      numberTel: document.querySelector("#numberTel").value,
+      numberCel: document.querySelector("#numberCel").value,
+      email: document.querySelector("#email").value,
+      dateLast: document.querySelector("#datePast").value,
+      dateNew: document.querySelector("#dateNew").value,
+      hoursDate: document.querySelector("#timeNew").value,
+      message: document.querySelector("#message").value,
+      created: new Date().getTime()
   };
 
- 
-  fetch('https://api-citas-dental.vercel.app/create/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataForm)
-    }) .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));;
-   
-  
+ var request = store.add(item);
 
-
-
-  // var requestOptions = {
-  //   method: "POST",
-  //   headers: new Headers({
-  //     "Content-Type": "application/json",
-  //     "Access-Control-Allow-Origin": "*",
-  //   }),
-  //   body: JSON.stringify(dataForm),
-  //   mode: "no-cors",
-  // };
-  // fetch("https://api-citas-dental.vercel.app/create", requestOptions)
-  //   .then((response) => response.text())
-  //   .then((result) => console.log(result))
-  //   .catch((error) => console.log("error", error));
+ request.onerror = function(e) {
+    console.log('Error', e.target.error.name);
+  };
+  request.onsuccess = function(e) {
+    console.log('Woot! Did it');
+  };
 }

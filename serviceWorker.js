@@ -11,9 +11,11 @@ const _staticFiles = [
 const _immutableFiles = [
   "/css/bootstrap.min.css",
   "/css/bootstrap.min.css.map",
+  "/css/iziToast.min.css",
   "/js/jquery.js",
   "/js/bootstrap.bundle.min.js",
   "/js/bootstrap.bundle.min.js.map",
+  "/js/iziToast.min.js",
 ];
 
 self.addEventListener("install", (installEvent) => {
@@ -41,17 +43,17 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
-  // const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
-  //   return (
-  //     cacheResponse ||
-  //     fetch(fetchEvent.request).then((networkResponse) => {
-  //       caches.open(dynamicCache).then((cache) => {
-  //         cache.put(fetchEvent.request, networkResponse.clone());
-  //         return networkResponse;
-  //       });
-  //     })
-  //   );
-  // });
+    const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
+      return (
+        cacheResponse ||
+        fetch(fetchEvent.request).then((networkResponse) => {
+          caches.open(dynamicCache).then((cache) => {
+            cache.put(fetchEvent.request, networkResponse.clone());
+            return networkResponse;
+          });
+        })
+      );
+    });
 });
 //First cache with backup
 self.addEventListener("message", (msgClient) => {
