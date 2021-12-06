@@ -43,17 +43,21 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
-    const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
-      return (
-        cacheResponse ||
-        fetch(fetchEvent.request).then((networkResponse) => {
-          caches.open(dynamicCache).then((cache) => {
-            cache.put(fetchEvent.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-      );
-    });
+    if(fetchEvent.request.method === "GET" && fetchEvent.request.url.includes('index.html')){
+      const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
+        return (
+          cacheResponse ||
+          fetch(fetchEvent.request).then((networkResponse) => {
+            caches.open(dynamicCache).then((cache) => {
+              cache.put(fetchEvent.request, networkResponse.clone());
+              return networkResponse;
+            });
+          })
+        );
+      });
+    }else if (fetchEvent.request.method === "POST"){
+      console.log(fetchEvent.request.url);
+    }
 });
 //First cache with backup
 self.addEventListener("message", (msgClient) => {
