@@ -2,11 +2,17 @@ let staticCache = "staticCache_v1";
 let dynamicCache = "dynamicCache_v1";
 let immutableCache = "immutableCache_v1";
 const _staticFiles = [
-  "/",
+  "./",
   "/index.html",
   "/css/style.css",
   "/js/main.js",
-  "/js/db.js"
+  "images/icons/icon-144x144.png",
+  "images/toooth-512.png",
+  "images/icons/apple-touch-icon.png",
+  "images/icons/favicon-32x32.png",
+  "images/icons/favicon-16x16.png",
+  "images/icons/favicon.ico"
+  
 ];
 const _immutableFiles = [
   "/css/bootstrap.min.css",
@@ -43,21 +49,26 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
-    if(fetchEvent.request.method === "GET" && fetchEvent.request.url.includes('index.html')){
-      const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
-        return (
-          cacheResponse ||
-          fetch(fetchEvent.request).then((networkResponse) => {
-            caches.open(dynamicCache).then((cache) => {
-              cache.put(fetchEvent.request, networkResponse.clone());
-              return networkResponse;
-            });
-          })
-        );
-      });
-    }else if (fetchEvent.request.method === "POST"){
-      console.log(fetchEvent.request.url);
-    }
+
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then((res) =>{
+      return res || fetch(fetchEvent.request);
+    })
+  );
+    
+      // const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
+      //   return (
+      //     cacheResponse ||
+      //     fetch(fetchEvent.request).then((networkResponse) => {
+      //       caches.open(dynamicCache).then((cache) => {
+      //         cache.put(fetchEvent.request, networkResponse.clone());
+      //         return networkResponse;
+      //       });
+      //     })
+      //   );
+      // });
+    
+    
 });
 //First cache with backup
 self.addEventListener("message", (msgClient) => {

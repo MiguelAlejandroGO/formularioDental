@@ -3,11 +3,6 @@ let db;
 let openRequest = indexedDB.open('test_db', 1);
 
 
-window.onload = function () {
-  setTimeout(function () {
-    document.querySelector(".preloader").style.display = "none";
-  }, 1000);
-};
 
 let newServiceWorker;
 if ("serviceWorker" in navigator) {
