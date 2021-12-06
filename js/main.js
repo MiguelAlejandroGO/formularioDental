@@ -104,8 +104,19 @@ function addDate() {
         },
         body: JSON.stringify(dataForm)
       }) .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));;
+      .then((result) => {
+        if(result !== ''){
+          iziToast.success({
+            title: 'Cita Agendada',
+            position: 'topRight'
+        });
+        }
+      })
+      .catch((error) => {
+        if(error){
+          addItem();
+        }
+      });
      
     
   }else{
@@ -138,8 +149,17 @@ function addItem() {
 
  request.onerror = function(e) {
     console.log('Error', e.target.error.name);
+    iziToast.error({
+      title: 'Error',
+      message: 'Ocurrio un problema al agendar su cita',
+      position: 'topRight'
+  });
   };
   request.onsuccess = function(e) {
-    console.log('Woot! Did it');
+    iziToast.success({
+      title: 'Exito',
+      message: 'Su cita fue agendada',
+      position: 'topRight'
+  });
   };
 }
