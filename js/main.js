@@ -107,7 +107,8 @@ function addDate() {
       .then((result) => {
         if(result !== ''){
           iziToast.success({
-            title: 'Cita Agendada',
+            title: 'Exito',
+            message: 'Su cita fue agendada',
             position: 'topRight'
         });
         }
