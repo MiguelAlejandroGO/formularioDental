@@ -102,19 +102,11 @@ function addDate() {
         },
         body: JSON.stringify(dataForm)
       }) .then((response) => response.json())
-      .then((result) => {
-        if(result !== ''){
-          iziToast.success({
-            title: 'Exito',
-            message: 'Su cita fue agendada',
-            position: 'topRight'
-        });
-        }
-      })
+      .then((result) => 
+        console.log(re)
+        )
       .catch((error) => {
-        if(error){
-          addItem();
-        }
+       console.log(error);
       });
      
     
