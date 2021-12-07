@@ -93,7 +93,7 @@ function addDate() {
     };
    
   
-    fetch('https://api-citas-dental.vercel.app/create/', {
+    fetch('https://api-citas-dental.vercel.app/create', {
         mode: 'no-cors',
         method: 'POST',
         headers: {
