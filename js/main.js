@@ -1,8 +1,16 @@
 let flagConection = true;
 let db;
-let openRequest = indexedDB.open('test_db', 1);
-
-
+let openRequest = indexedDB.open("test_db", 1);
+const nameU = document.querySelector("#name"),
+  age = document.querySelector("#age"),
+  address = document.querySelector("#address"),
+  numberTel = document.querySelector("#numberTel"),
+  numberCel = document.querySelector("#numberCel"),
+  email = document.querySelector("#email"),
+  dateLast = document.querySelector("#datePast"),
+  dateNew = document.querySelector("#dateNew"),
+  hoursDate = document.querySelector("#timeNew"),
+  message = document.querySelector("#message");
 
 let newServiceWorker;
 if ("serviceWorker" in navigator) {
@@ -24,19 +32,19 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-openRequest.onupgradeneeded = function(e) {
+openRequest.onupgradeneeded = function (e) {
   let db = e.target.result;
-  console.log('running onupgradeneeded');
-  if (!db.objectStoreNames.contains('dbDates')) {
-    let storeOS = db.createObjectStore('dates', {autoIncrement: true});
+  console.log("running onupgradeneeded");
+  if (!db.objectStoreNames.contains("dbDates")) {
+    let storeOS = db.createObjectStore("dates", { autoIncrement: true });
   }
 };
-openRequest.onsuccess = function(e) {
-  console.log('running onsuccess');
+openRequest.onsuccess = function (e) {
+  console.log("running onsuccess");
   db = e.target.result;
 };
-openRequest.onerror = function(e) {
-  console.log('onerror!');
+openRequest.onerror = function (e) {
+  console.log("onerror!");
   console.dir(e);
 };
 function showSnackbarUpdate() {
@@ -54,110 +62,129 @@ lauchUpdate.addEventListener("click", () => {
 });
 
 window.addEventListener("online", () => {
-  let  toast = document.querySelector('.warning');
+  let toast = document.querySelector(".warning");
   flagConection = true;
-  iziToast.destroy();({transitionOut: 'fadeOutUp'}, toast);
+  iziToast.destroy();
+  ({ transitionOut: "fadeOutUp" }, toast);
   iziToast.info({
-    title: 'Conexion restablecida',
-    position: 'topLeft'
-});
+    title: "Conexion restablecida",
+    position: "topLeft",
+  });
 });
 
 window.addEventListener("offline", () => {
   iziToast.warning({
-    id: 'warning',
-    class: 'warning',
-    title: 'Error de Conexion',
-    message: 'Esta en modo offline',
+    id: "warning",
+    class: "warning",
+    title: "Error de Conexion",
+    message: "Esta en modo offline",
     timeout: false,
-    position: 'topLeft'
-});
+    position: "topLeft",
+  });
   flagConection = false;
 });
 
 function addDate() {
-
-  if(flagConection) {
+  if (flagConection) {
     let dataForm = {
       id: 0,
-      name: document.querySelector("#name").value,
-      age: parseInt(document.querySelector("#age").value),
-      address: document.querySelector("#address").value,
-      numberTel: document.querySelector("#numberTel").value,
-      numberCel: document.querySelector("#numberCel").value,
-      email: document.querySelector("#email").value,
-      dateLast: document.querySelector("#datePast").value,
-      dateNew: document.querySelector("#dateNew").value,
-      hoursDate: document.querySelector("#timeNew").value,
-      message: document.querySelector("#message").value,
+      name: nameU.value,
+      age: parseInt(age.value),
+      address: address.value,
+      numberTel: numberTel.value,
+      numberCel: numberCel.value,
+      email: email.value,
+      dateLast: dateLast.value,
+      dateNew: dateNew.value,
+      hoursDate: hoursDate.value,
+      message: message.value,
     };
 
-    fetch('https://api-citas-dental.vercel.app/create', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataForm)
-      }) .then((response) => response.json())
+    fetch("https://api-citas-dental.vercel.app/create", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataForm),
+    })
+      .then((response) => response.json())
       .then((result) => {
-        if(result.status === 200) {
+        if (result.status === 200) {
           iziToast.success({
-            title: 'Exito',
-            message: 'Su cita fue agendada',
-            position: 'topRight'
-        });
-      }})
+            title: "Exito",
+            message: "Su cita fue agendada",
+            position: "topRight",
+          });
+          nameU.value = "";
+          age.value = "";
+          address.value = "";
+          numberTel.value = "";
+          numberCel.value = "";
+          email.value = "";
+          dateLast.value = "";
+          dateNew.value = "";
+          hoursDate.value = "";
+          message.value = "";
+        }
+      })
       .catch((error) => {
-       if(error){
-        iziToast.error({
-          title: 'Error',
-          message: 'Ocurrio un problema al agendar su cita',
-          position: 'topRight'
+        if (error) {
+          iziToast.error({
+            title: "Error",
+            message: "Ocurrio un problema al agendar su cita",
+            position: "topRight",
+          });
+        }
       });
-       }
-      });
-  }else{
+  } else {
     addItem();
   }
- 
 }
 
-
 function addItem() {
-
-  var transaction = db.transaction(['dates'], 'readwrite');
-  var store = transaction.objectStore('dates');
+  var transaction = db.transaction(["dates"], "readwrite");
+  var store = transaction.objectStore("dates");
   var item = {
-      id: 0,
-      name: document.querySelector("#name").value,
-      age: parseInt(document.querySelector("#age").value),
-      address: document.querySelector("#address").value,
-      numberTel: document.querySelector("#numberTel").value,
-      numberCel: document.querySelector("#numberCel").value,
-      email: document.querySelector("#email").value,
-      dateLast: document.querySelector("#datePast").value,
-      dateNew: document.querySelector("#dateNew").value,
-      hoursDate: document.querySelector("#timeNew").value,
-      message: document.querySelector("#message").value,
-      created: new Date().getTime()
+    id: 0,
+    name: nameU.value,
+    age: parseInt(age.value),
+    address: address.value,
+    numberTel: numberTel.value,
+    numberCel: numberCel.value,
+    email: email.value,
+    dateLast: dateLast.value,
+    dateNew: dateNew.value,
+    hoursDate: hoursDate.value,
+    message: message.value,
+    created: new Date().getTime(),
   };
 
- var request = store.add(item);
+  var request = store.add(item);
 
- request.onerror = function(e) {
-    console.log('Error', e.target.error.name);
+  request.onerror = function (e) {
+    console.log("Error", e.target.error.name);
     iziToast.error({
-      title: 'Error',
-      message: 'Ocurrio un problema al agendar su cita',
-      position: 'topRight'
-  });
+      title: "Error",
+      message: "Ocurrio un problema al agendar su cita",
+      position: "topRight",
+    });
   };
-  request.onsuccess = function(e) {
+  request.onsuccess = function (e) {
     iziToast.success({
-      title: 'Exito',
-      message: 'Su cita fue agendada',
-      position: 'topRight'
-  });
+      title: "Exito",
+      message: "Su cita fue agendada",
+      position: "topRight",
+    });
+    nameU.value = "";
+    age.value = "";
+    address.value = "";
+    numberTel.value = "";
+    numberCel.value = "";
+    email.value = "";
+    dateLast.value = "";
+    dateNew.value = "";
+    hoursDate.value = "";
+    message.value = "";
   };
 }
