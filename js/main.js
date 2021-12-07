@@ -94,7 +94,7 @@ function addDate() {
    
   
     fetch('https://api-citas-dental.vercel.app/create/', {
-        mode: 'cors',
+        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Accept': 'application/json',
