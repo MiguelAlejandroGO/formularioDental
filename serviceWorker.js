@@ -6,6 +6,7 @@ const _staticFiles = [
   "/index.html",
   "/css/style.css",
   "/js/main.js",
+  "/manifest.json",
   "images/icons/icon-144x144.png",
   "images/toooth-512.png",
   "images/icons/apple-touch-icon.png",

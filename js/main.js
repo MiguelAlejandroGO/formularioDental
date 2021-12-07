@@ -41,7 +41,8 @@ openRequest.onerror = function(e) {
 };
 function showSnackbarUpdate() {
   let x = document.getElementById("snackbar");
-  x.className = "show";
+  x.classList.remove("d-none");
+  x.classList.add("show");
 }
 
 let lauchUpdate = document.getElementById("lauchUpdate");
