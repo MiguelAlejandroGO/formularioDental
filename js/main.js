@@ -93,7 +93,7 @@ function addDate() {
     };
    
   
-    fetch('https://api-citas-dental.vercel.app/create', {
+    fetch('https://api-citas-dental.vercel.app/createo', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -112,8 +112,6 @@ function addDate() {
       .catch((error) => {
        console.log(error);
       });
-     
-    
   }else{
     addItem();
   }
