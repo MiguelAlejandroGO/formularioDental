@@ -91,6 +91,7 @@ function addDate() {
       hoursDate: document.querySelector("#timeNew").value,
       message: document.querySelector("#message").value,
     };
+   
   
     fetch('https://api-citas-dental.vercel.app/create/', {
         method: 'POST',
