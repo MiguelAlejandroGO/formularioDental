@@ -102,7 +102,7 @@ function addDate() {
         body: JSON.stringify(dataForm)
       }) .then((response) => response.json())
       .then((result) => 
-        console.log(re)
+        console.log(result)
         )
       .catch((error) => {
        console.log(error);
