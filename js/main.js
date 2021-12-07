@@ -91,7 +91,7 @@ function addDate() {
       hoursDate: document.querySelector("#timeNew").value,
       message: document.querySelector("#message").value,
     };
-    
+
     fetch('https://api-citas-dental.vercel.app/create', {
         method: 'POST',
         headers: {
@@ -109,7 +109,13 @@ function addDate() {
         });
       }})
       .catch((error) => {
-       console.log(error);
+       if(error){
+        iziToast.error({
+          title: 'Error',
+          message: 'Ocurrio un problema al agendar su cita',
+          position: 'topRight'
+      });
+       }
       });
   }else{
     addItem();
