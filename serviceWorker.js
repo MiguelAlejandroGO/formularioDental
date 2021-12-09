@@ -1,3 +1,4 @@
+importScripts('/js/dbForm.js');
 let staticCache = "staticCache_v1";
 let dynamicCache = "dynamicCache_v1";
 let immutableCache = "immutableCache_v1";
@@ -6,6 +7,7 @@ const _staticFiles = [
   "/index.html",
   "/css/style.css",
   "/js/main.js",
+  '/js/dbForm.js',
   "/manifest.json",
   "images/icons/icon-144x144.png",
   "images/toooth-512.png",
@@ -51,12 +53,17 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (fetchEvent) => {
 
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then((res) =>{
-      return res || fetch(fetchEvent.request);
-    })
-  );
+
+    fetchEvent.respondWith(
+      caches.match(fetchEvent.request).then((res) =>{
+        return res || fetch(fetchEvent.request);
+      })
     
+    )
+
+    
+  
+  
       // const _result = caches.match(fetchEvent.request).then((cacheResponse) => {
       //   return (
       //     cacheResponse ||
@@ -69,6 +76,8 @@ self.addEventListener("fetch", (fetchEvent) => {
       //   );
       // });
     
+      // fetchEvent.respondWith(_result);
+  
     
 });
 //First cache with backup
@@ -77,3 +86,10 @@ self.addEventListener("message", (msgClient) => {
     self.skipWaiting();
   }
 });
+
+self.addEventListener('sync', function(event) {
+  if (event.tag == 'myFirstSync') {
+    event.waitUntil(redData());
+  }
+});
+

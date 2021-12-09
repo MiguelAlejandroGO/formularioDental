@@ -1,7 +1,8 @@
+
 let flagConection = true;
-let db;
-let openRequest = indexedDB.open("test_db", 1);
-const nameU = document.querySelector("#name"),
+
+
+const nameUsuario = document.querySelector("#name"),
   age = document.querySelector("#age"),
   address = document.querySelector("#address"),
   numberTel = document.querySelector("#numberTel"),
@@ -12,7 +13,10 @@ const nameU = document.querySelector("#name"),
   hoursDate = document.querySelector("#timeNew"),
   message = document.querySelector("#message");
 
+let lauchUpdate = document.getElementById("lauchUpdate");
+
 let newServiceWorker;
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker
@@ -32,28 +36,12 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-openRequest.onupgradeneeded = function (e) {
-  let db = e.target.result;
-  console.log("running onupgradeneeded");
-  if (!db.objectStoreNames.contains("dbDates")) {
-    let storeOS = db.createObjectStore("dates", { autoIncrement: true });
-  }
-};
-openRequest.onsuccess = function (e) {
-  console.log("running onsuccess");
-  db = e.target.result;
-};
-openRequest.onerror = function (e) {
-  console.log("onerror!");
-  console.dir(e);
-};
 function showSnackbarUpdate() {
   let x = document.getElementById("snackbar");
   x.classList.remove("d-none");
   x.classList.add("show");
 }
 
-let lauchUpdate = document.getElementById("lauchUpdate");
 lauchUpdate.addEventListener("click", () => {
   newServiceWorker.postMessage({
     action: "skipWaiting",
@@ -70,6 +58,9 @@ window.addEventListener("online", () => {
     title: "Conexion restablecida",
     position: "topLeft",
   });
+  navigator.serviceWorker.ready.then(function (swRegistration) {
+    return swRegistration.sync.register("myFirstSync");
+  });
 });
 
 window.addEventListener("offline", () => {
@@ -83,12 +74,12 @@ window.addEventListener("offline", () => {
   });
   flagConection = false;
 });
-
+//////////////////////////////ENVIAR DATOS AL SERVIDOR//////////////////////////////
 function addDate() {
-  if (flagConection) {
+  if (flagConection === true) {
     let dataForm = {
       id: 0,
-      name: nameU.value,
+      name: nameUsuario.value,
       age: parseInt(age.value),
       address: address.value,
       numberTel: numberTel.value,
@@ -116,7 +107,7 @@ function addDate() {
             message: "Su cita fue agendada",
             position: "topRight",
           });
-          nameU.value = "";
+          nameUsuario.value = "";
           age.value = "";
           address.value = "";
           numberTel.value = "";
@@ -141,50 +132,4 @@ function addDate() {
     addItem();
   }
 }
-
-function addItem() {
-  var transaction = db.transaction(["dates"], "readwrite");
-  var store = transaction.objectStore("dates");
-  var item = {
-    id: 0,
-    name: nameU.value,
-    age: parseInt(age.value),
-    address: address.value,
-    numberTel: numberTel.value,
-    numberCel: numberCel.value,
-    email: email.value,
-    dateLast: dateLast.value,
-    dateNew: dateNew.value,
-    hoursDate: hoursDate.value,
-    message: message.value,
-    created: new Date().getTime(),
-  };
-
-  var request = store.add(item);
-
-  request.onerror = function (e) {
-    console.log("Error", e.target.error.name);
-    iziToast.error({
-      title: "Error",
-      message: "Ocurrio un problema al agendar su cita",
-      position: "topRight",
-    });
-  };
-  request.onsuccess = function (e) {
-    iziToast.success({
-      title: "Exito",
-      message: "Su cita fue agendada",
-      position: "topRight",
-    });
-    nameU.value = "";
-    age.value = "";
-    address.value = "";
-    numberTel.value = "";
-    numberCel.value = "";
-    email.value = "";
-    dateLast.value = "";
-    dateNew.value = "";
-    hoursDate.value = "";
-    message.value = "";
-  };
-}
+////////////////////////////////////////////////////////////////////////////////////
